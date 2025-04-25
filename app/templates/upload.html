@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VHDL Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    h1, h2 {
+      color: #343a40;
+    }
+    form {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      background: #e9ecef;
+      padding: 15px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<h1>VHDL Simulation</h1>
+
+<!-- Upload Form -->
+<form method="POST" enctype="multipart/form-data">
+  <label for="hdl_file">Upload VHDL File:</label>
+  <input type="file" name="hdl_file" accept=".vhdl,.vhd" required>
+  <button type="submit">Upload</button>
+</form>
+
+{% if ports %}
+<!-- Inputs Form -->
+<form method="POST">
+  <h2>Enter Inputs</h2>
+  {% for port in ports %}
+    {% if port['dir'] == 'in' %}
+      <label for="{{ port['name'] }}">{{ port['name'] }}:</label>
+      <input type="text" name="{{ port['name'] }}" required>
+    {% endif %}
+  {% endfor %}
+  <button type="submit" name="simulate" value="1">Simulate</button>
+</form>
+{% endif %}
+
+{% if simulation_result %}
+<!-- Simulation Result -->
+<div class="result">
+  <h2>Simulation Result</h2>
+  <p>{{ simulation_result }}</p>
+</div>
+{% endif %}
+
+</body>
+</html>
