@@ -24,7 +24,9 @@ def index():
       if file and allowed_file(file.filename):
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
-        ports = parse_entity_ports(filepath)
+        with open(filepath, 'r') as f:
+          code = f.read()
+        ports = parse_entity_ports(code)
 
     elif 'simulate' in request.form:
       if filepath:
