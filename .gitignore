@@ -1,1 +1,5 @@
+# Ignore uploads content
 uploads/*
+
+# Allow the .gitkeep file
+!uploads/.gitkeep
