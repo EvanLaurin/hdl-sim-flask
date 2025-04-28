@@ -8,12 +8,18 @@ class CodeBlock:
     
   def __repr__(self):
     return f"<{self.block_type.capitalize()}Block name='{self.name}'>"
+  
+class vhdlBlock(CodeBlock):
+  def __init__(self, name, raw_code):
+    super().__init__(name, "vhdl", raw_code)
+    self.entities = []              # List of entities in the VHDL code
+    self.architectures = []         # List of architectures in the VHDL code
 
 class EntityBlock(CodeBlock):
   def __init__(self, name, raw_code):
     super().__init__(name, "entity", raw_code)
     self.ports = []                # List of ports in the entity
-    self.generics = []              # List of generics in the entity
+    self.generics = []             # List of generics in the entity
   
   def parse_entity_name(self):
     match = re.search(r'entity\s+(\w+)\s+is', self.raw_code, re.IGNORECASE)
