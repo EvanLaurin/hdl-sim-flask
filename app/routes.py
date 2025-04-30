@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-from app.parser import parse_entity_ports
+from app.vhdl_structures import vhdlBlock
 from app.simulations import simulate_hdl
 from app import app
 
@@ -26,7 +26,7 @@ def index():
         file.save(filepath)
         with open(filepath, 'r') as f:
           code = f.read()
-        ports = parse_entity_ports(code)
+          top_block = vhdlBlock(code)
 
     elif 'simulate' in request.form:
       if filepath:
