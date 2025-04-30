@@ -15,6 +15,15 @@ class vhdlBlock(CodeBlock):
     self.entities = []              # List of entities in the VHDL code
     self.architectures = []         # List of architectures in the VHDL code
 
+  def parse_entities(self):
+    ## TODO: Implement entity parsing logic
+    return []
+  
+  def parse_architectures(self):
+    ## TODO: Implement architecture parsing logic
+    return []
+  
+
 class EntityBlock(CodeBlock):
   def __init__(self, name, raw_code):
     super().__init__(name, "entity", raw_code)
@@ -127,30 +136,22 @@ class ArchitectureBlock(CodeBlock):
     self.concurent_statements = [] # List of concurrent statements in the architecture
   
   def parse_concurrent_statements(self):
-    """
-    Parses the concurrent statements in the architecture block.
-
-    This method identifies and extracts concurrent statements from the raw VHDL code
-    of the architecture block. It caches the result for future use.
-
-    Returns:
-        list: A list of dictionaries, each representing a concurrent statement with its type and details.
-    """
-    if self.concurent_statements:  # Return cached result if already computed
-      return self.concurent_statements
+    ## TODO: Implement concurrent statement parsing logic
+    return []
+  
+  def parse_signals(self):
+    ## TODO: Implement signal parsing logic
+    return []
+  
+  def parse_processes(self):
+    ## TODO: Implement process parsing logic
+    return []
+  
+  def parse_components(self):
+    ## TODO: Implement component parsing logic
+    return []
     
-    # Example regex to match concurrent statements (simplified)
-    pattern = r'(\w+)\s*:\s*(\w+)\s*\((.*?)\);'
-    matches = re.findall(pattern, self.raw_code, re.DOTALL | re.IGNORECASE)
-    
-    for match in matches:
-      name, type_, details = match
-      self.concurent_statements.append({'name': name.strip(), 'type': type_.strip(), 'details': details.strip()})
-    
-    return self.concurent_statements
-    
-    
-
+  
 class ComponentBlock(CodeBlock):
   def __init__(self, name, raw_code):
     super().__init__(name, "component", raw_code)
