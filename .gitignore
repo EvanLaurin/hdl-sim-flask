@@ -1,5 +1,6 @@
 # Ignore uploads content
 uploads/*
+app/__pycache__/
 
 # Allow the .gitkeep file
 !uploads/.gitkeep
